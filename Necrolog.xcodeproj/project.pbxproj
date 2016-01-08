@@ -387,6 +387,7 @@
 				177D267C1C3FD26300FC14C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		177D267D1C3FD26300FC14C1 /* Build configuration list for PBXNativeTarget "NecrologTests" */ = {
 			isa = XCConfigurationList;
@@ -395,6 +396,7 @@
 				177D267F1C3FD26300FC14C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

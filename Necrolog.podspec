@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Necrolog"
-  s.version      = "0.9.5"
+  s.version      = "0.9.6"
   s.license      = { :type => "Beerware", :file => 'LICENCE.txt' }
   s.summary      = "Killer Swift debug log library for iOS."
   s.homepage     = "https://github.com/kubbing/Necrolog"
@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = "8.0"
   s.ios.framework = 'UIKit' 
-  s.source       = { :git => "https://github.com/kubbing/Necrolog.git", :tag => "0.9.5" }
+  s.source       = { :git => "https://github.com/kubbing/Necrolog.git", :tag => "0.9.6" }
   s.source_files = 'Necrolog/*.swift'
   s.pod_target_xcconfig = { 'OTHER_SWIFT_FLAGS[config=Debug]' => '-DDEBUG' }
 end
