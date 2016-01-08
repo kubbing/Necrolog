@@ -1,6 +1,6 @@
-# Necrolog
+# 💀 Necrolog 💀
 
-Simple [Swift](https://developer.apple.com/swift/)  debug log library for [iOS](http://www.apple.com/ios/).
+Killer [Swift](https://developer.apple.com/swift/)  debug log library for [iOS](http://www.apple.com/ios/).
 
 ![Imgur](http://i.imgur.com/RSlWQIy.png)
 
@@ -8,9 +8,11 @@ Simple [Swift](https://developer.apple.com/swift/)  debug log library for [iOS](
 
 	pod 'Necrolog', :git => 'https://github.com/kubbing/Necrolog'
 
-Add `-DDEBUG` to your project's 'Other Swift Flags' (Debug).
+Add `-DDEBUG` to your project's `'Other Swift Flags'` (Debug only).
 
-# Usage
+# Usage (Swift)
+
+	import Necrolog
 
 	Necrolog.setup()
 	Necrolog.setup(
@@ -38,12 +40,19 @@ Add `-DDEBUG` to your project's 'Other Swift Flags' (Debug).
     Necrolog.warning("warning test", [ "key1" : "obj1", "key2" : "obj2" ])
     Necrolog.error("error test", NSError(domain: "Necrolog", code: 1, userInfo: [ "description" : "test error description" ]))
 
+# Usage (Objective-C)
+
+	@import Necrolog;
+
+	[Necrolog setupWithInitialTimeInterval:CACurrentMediaTime()
+	                              logLevel:LogLevelDebug
+	                     splitMultipleArgs:NO
+	                       logCodeLocation:YES
+	                            withColors:YES];
 
 # Extras
 
-Color support using [XcodeColors](https://github.com/robbiehanson/XcodeColors), install using [Alcatraz](http://alcatraz.io) package manager. Enable using:
-
-	Necrolog.setup(withColors: false)
+Color support using [XcodeColors](https://github.com/robbiehanson/XcodeColors), install using [Alcatraz](http://alcatraz.io) package manager. Enable using `withColors: true` in `Necrolog`'s `setup(…)`
 
 # FAQ
 
