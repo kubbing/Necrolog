@@ -8,7 +8,6 @@ Killer [Swift](https://developer.apple.com/swift/)  debug log library for [iOS](
 
 	pod 'Necrolog', :git => 'https://github.com/kubbing/Necrolog'
 
-Add `-DDEBUG` to your project's `'Other Swift Flags'` (Debug only).
 
 # Usage (Swift)
 
