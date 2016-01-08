@@ -8,6 +8,6 @@ Pod::Spec.new do |s|
   s.social_media_url   = "http://twitter.com/ku33ing"
 
   s.ios.deployment_target = "8.0"
-  s.source       = { :git => "https://github.com/kubbing/Necrolog/Necrolog.podspec", :tag => "0.9.0" }
+  s.source       = { :git => "https://github.com/kubbing/Necrolog.git", :tag => "0.9.1" }
   s.source_files = 'Necrolog/*.swift'
 end
