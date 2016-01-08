@@ -1,0 +1,23 @@
+# Necrolog
+
+Simple [Swift](https://developer.apple.com/swift/)  logging library for [iOS](http://www.apple.com/ios/).
+
+# Installation
+
+# Usage
+
+# Extras
+
+Color support using [XcodeColors](https://github.com/robbiehanson/XcodeColors), install using [Alcatraz](http://alcatraz.io) package manager. Enable using:
+
+	Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), withColors: false)
+
+# FAQ
+
+1. Yet another logging library?
+	
+	Yes.
+	
+2. Why?
+	
+	Because fuck you! Thats why.
