@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name         = "Necrolog"
   s.version      = "0.9.3"
-  s.license      = "Beerware" => 'https://en.wikipedia.org/wiki/Beerware'
+  s.license      = { :type => "Beerware", :file => 'LICENCE.txt' }
   s.summary      = "Killer Swift debug log library for iOS."
   s.homepage     = "https://github.com/kubbing/Necrolog"
   s.author             = { "Jakub Hladík" => "kubbing@me.com" }
