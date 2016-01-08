@@ -63,6 +63,10 @@ Color support using [XcodeColors](https://github.com/robbiehanson/XcodeColors), 
 	
 	Because fuck you! Thats why.
 	
+3. Why there are not asserts in your unit tests?
+
+	Ditto.
+	
 # Licence
 
 [Beerware](https://en.wikipedia.org/wiki/Beerware)
