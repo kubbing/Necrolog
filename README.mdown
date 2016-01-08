@@ -41,7 +41,7 @@ Add `-DDEBUG` to your 'Other Swift Flags' (Debug).
 
 Color support using [XcodeColors](https://github.com/robbiehanson/XcodeColors), install using [Alcatraz](http://alcatraz.io) package manager. Enable using:
 
-	Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), withColors: false)
+	Necrolog.setup(withColors: false)
 
 # FAQ
 
