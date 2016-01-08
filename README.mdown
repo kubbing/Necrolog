@@ -20,7 +20,7 @@ Add `-DDEBUG` to your project's `'Other Swift Flags'` (Debug only).
 		logLevel: .Verbose, 						    // (default .Debug)
 		splitMultipleArgs: true,                        // newlines between args (false)
 		logCodeLocation: false,                         // append file function:line (true)
-		withColors: true))                              // colorize output (false)
+		withColors: true)                               // colorize output (false)
 
     Necrolog.verbose("verbose test 1 arg")
     Necrolog.debug("debug test 1 arg")
