@@ -6,19 +6,12 @@
 //  Copyright © 2016 Jakub Hladík. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-//
-//  Log.swift
-//  NecroLog
-//
-//  Created by Jakub Hladík on 08.01.16.
-//  Copyright © 2016 Jakub Hladík. All rights reserved.
-//
 
 import UIKit
 
-public enum LogLevel: Int {
+@objc public enum LogLevel: Int {
     case Verbose = 0
     case Debug
     case Info
@@ -26,11 +19,11 @@ public enum LogLevel: Int {
     case Error
 }
 
-public class Necrolog {
+@objc public class Necrolog: NSObject {
     
     static let instance = Necrolog()
     
-    private init() {
+    private override init() {
         
     }
     
@@ -55,16 +48,13 @@ public class Necrolog {
     let Reset: String = Escape + ";"        // Clear any foreground or background color
     
     public class func setup(
-        withInitialTimeInterval time0: CFTimeInterval?,
+        withInitialTimeInterval time0: CFTimeInterval = CACurrentMediaTime(),
         logLevel level: LogLevel = .Debug,
         splitMultipleArgs splitArgs: Bool = false,
         logCodeLocation: Bool = true,
         withColors colorize: Bool = false)
     {
-        if let interval = time0 {
-            self.instance.time0 = interval
-        }
-        
+        self.instance.time0 = time0
         self.instance.logLevel = level
         self.instance.splitArgs = splitArgs
         self.instance.logCodeLocation = logCodeLocation

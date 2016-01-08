@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Necrolog"
-  s.version      = "0.9.4"
+  s.version      = "0.9.5"
   s.license      = { :type => "Beerware", :file => 'LICENCE.txt' }
   s.summary      = "Killer Swift debug log library for iOS."
   s.homepage     = "https://github.com/kubbing/Necrolog"
@@ -8,6 +8,6 @@ Pod::Spec.new do |s|
   s.social_media_url   = "http://twitter.com/ku33ing"
 
   s.ios.deployment_target = "8.0"
-  s.source       = { :git => "https://github.com/kubbing/Necrolog.git", :tag => "0.9.4" }
+  s.source       = { :git => "https://github.com/kubbing/Necrolog.git", :tag => "0.9.5" }
   s.source_files = 'Necrolog/*.swift'
 end
