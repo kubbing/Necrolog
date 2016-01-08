@@ -24,7 +24,8 @@ class NecrologTests: XCTestCase {
         super.tearDown()
     }
     
-    func print() {
+    func necroPrint() {
+        print("\n")
         Necrolog.verbose("verbose test 1 arg")
         Necrolog.debug("debug test 1 arg")
         Necrolog.info("info test 1 arg")
@@ -42,13 +43,14 @@ class NecrologTests: XCTestCase {
         Necrolog.info("info test", [ 2 : 3 ])
         Necrolog.warning("warning test", [ "key1" : "obj1", "key2" : "obj2" ])
         Necrolog.error("error test", NSError(domain: "Necrolog", code: 1, userInfo: [ "description" : "test error description" ]))
+        print("\n")
     }
     
     func testBasic() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        self.print()
+        self.necroPrint()
     }
     
     func testSingleLine() {
@@ -57,7 +59,7 @@ class NecrologTests: XCTestCase {
         
         Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .Verbose, withColors: false)
         
-        self.print()
+        self.necroPrint()
     }
     
     func testMultiLine() {
@@ -66,7 +68,7 @@ class NecrologTests: XCTestCase {
         
         Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .Verbose, splitMultipleArgs: true, withColors: false)
         
-        self.print()
+        self.necroPrint()
     }
     
     func testSingleLineColor() {
@@ -75,7 +77,7 @@ class NecrologTests: XCTestCase {
         
         Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .Verbose, withColors: true)
         
-        self.print()
+        self.necroPrint()
     }
     
     func testMultiLineColor() {
@@ -84,7 +86,7 @@ class NecrologTests: XCTestCase {
         
         Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .Verbose, splitMultipleArgs: true, withColors: true)
         
-        self.print()
+        self.necroPrint()
     }
     
     func testSingleLineColorNoLocation() {
@@ -93,7 +95,7 @@ class NecrologTests: XCTestCase {
         
         Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .Verbose, logCodeLocation: false, withColors: true)
         
-        self.print()
+        self.necroPrint()
     }
     
     func testMultiLineColorNoLocation() {
@@ -102,7 +104,7 @@ class NecrologTests: XCTestCase {
         
         Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .Verbose, splitMultipleArgs: true, logCodeLocation: false, withColors: true)
         
-        self.print()
+        self.necroPrint()
     }
 
     
