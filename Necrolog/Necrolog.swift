@@ -26,7 +26,7 @@ import UIKit
     case Error
 }
 
-class Necrolog {
+public class Necrolog {
     
     static let instance = Necrolog()
     
@@ -41,13 +41,13 @@ class Necrolog {
     
     // color support
     var colorize = false
-    var timeColor = UIColor.grayColor()
-    var verboseColor = UIColor.lightGrayColor()
-    var debugColor = UIColor.lightGrayColor()
-    var infoColor = UIColor.lightTextColor()
-    var warningColor = UIColor.orangeColor()
-    var errorColor = UIColor.redColor()
-    var codeLocationColor = UIColor.darkGrayColor()
+    public var timeColor = UIColor.grayColor()
+    public var verboseColor = UIColor.lightGrayColor()
+    public var debugColor = UIColor.lightGrayColor()
+    public var infoColor = UIColor.lightTextColor()
+    public var warningColor = UIColor.orangeColor()
+    public var errorColor = UIColor.redColor()
+    public var codeLocationColor = UIColor.darkGrayColor()
     
     static let Escape: String = "\u{001b}["
     let ResetGg: String = Escape + "fg;"    // Clear any foreground color
