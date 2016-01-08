@@ -18,7 +18,7 @@ import Foundation
 
 import UIKit
 
-@objc enum LogLevel: Int {
+public enum LogLevel: Int {
     case Verbose = 0
     case Debug
     case Info
@@ -54,7 +54,7 @@ public class Necrolog {
     let ResetBg: String = Escape + "bg;"    // Clear any background color
     let Reset: String = Escape + ";"        // Clear any foreground or background color
     
-    class func setup(
+    public class func setup(
         withInitialTimeInterval time0: CFTimeInterval?,
         logLevel level: LogLevel = .Debug,
         splitMultipleArgs splitArgs: Bool = false,
@@ -71,7 +71,7 @@ public class Necrolog {
         self.instance.colorize = colorize
     }
     
-    class func entry(
+    public class func entry(
         longPath: String = __FILE__,
         function: String = __FUNCTION__,
         line: Int = __LINE__)
@@ -79,7 +79,7 @@ public class Necrolog {
         self.instance.trace(messages: [ "Entry" ], withLevel: .Debug, longPath: longPath, function: function, line: line)
     }
     
-    class func exit(
+    public class func exit(
         longPath: String = __FILE__,
         function: String = __FUNCTION__,
         line: Int = __LINE__)
@@ -87,11 +87,7 @@ public class Necrolog {
         self.instance.trace(messages: [ "Exit" ], withLevel: .Debug, longPath: longPath, function: function, line: line)
     }
     
-    class func raw(messages: Any...) {
-        self.instance.trace(messages: messages, withLevel: .Error)
-    }
-    
-    class func verbose(
+    public class func verbose(
         messages: Any...,
         longPath: String = __FILE__,
         function: String = __FUNCTION__,
@@ -100,7 +96,7 @@ public class Necrolog {
         self.instance.trace(messages: messages, withLevel: .Verbose, longPath: longPath, function: function, line: line)
     }
     
-    class func debug(
+    public class func debug(
         messages: Any...,
         longPath: String = __FILE__,
         function: String = __FUNCTION__,
@@ -109,7 +105,7 @@ public class Necrolog {
         self.instance.trace(messages: messages, withLevel: .Debug, longPath: longPath, function: function, line: line)
     }
     
-    class func info(
+    public class func info(
         messages: Any...,
         longPath: String = __FILE__,
         function: String = __FUNCTION__,
@@ -118,7 +114,7 @@ public class Necrolog {
         self.instance.trace(messages: messages, forcePrefix: " Info:", withLevel: .Info, longPath: longPath, function: function, line: line)
     }
     
-    class func warning(
+    public class func warning(
         messages: Any...,
         longPath: String = __FILE__,
         function: String = __FUNCTION__,
@@ -127,7 +123,7 @@ public class Necrolog {
         self.instance.trace(messages: messages, forcePrefix: " Warning:", withLevel: .Warning, longPath: longPath, function: function, line: line)
     }
     
-    class func error(
+    public class func error(
         messages: Any...,
         longPath: String = __FILE__,
         function: String = __FUNCTION__,
