@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = "8.0"
   s.ios.framework = 'UIKit' 
-  s.source       = { :git => "https://github.com/kubbing/Necrolog.git", :tag => "0.9.6" }
+  s.source       = { :git => "https://github.com/kubbing/Necrolog.git", :tag => s.version }
   s.source_files = 'Necrolog/*.swift'
   s.pod_target_xcconfig = { 'OTHER_SWIFT_FLAGS[config=Debug]' => '-DDEBUG' }
 end
