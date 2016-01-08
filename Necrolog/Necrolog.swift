@@ -115,7 +115,7 @@ class Necrolog {
         function: String = __FUNCTION__,
         line: Int = __LINE__) -> Void
     {
-        self.instance.trace(messages: messages, withLevel: .Info, longPath: longPath, function: function, line: line)
+        self.instance.trace(messages: messages, forcePrefix: " Info:", withLevel: .Info, longPath: longPath, function: function, line: line)
     }
     
     class func warning(
@@ -124,7 +124,7 @@ class Necrolog {
         function: String = __FUNCTION__,
         line: Int = __LINE__) -> Void
     {
-        self.instance.trace(messages: messages, splitArray: true, withLevel: .Warning, longPath: longPath, function: function, line: line)
+        self.instance.trace(messages: messages, forcePrefix: " Warning:", withLevel: .Warning, longPath: longPath, function: function, line: line)
     }
     
     class func error(
@@ -133,13 +133,13 @@ class Necrolog {
         function: String = __FUNCTION__,
         line: Int = __LINE__) -> Void
     {
-        self.instance.trace(messages: messages, splitArray: true, withLevel: .Error, longPath: longPath, function: function, line: line)
+        self.instance.trace(messages: messages, forcePrefix: " Error:", withLevel: .Error, longPath: longPath, function: function, line: line)
     }
     
     private func trace(
         messages messages: Array<Any>,
         withLevel level: LogLevel = .Debug,
-        forcePrefix prefix: String? = nil,
+        forcePrefix prefix: String = "",
         splitArray split: Bool = false,
         longPath: String? = nil,
         function: String? = nil,
@@ -167,7 +167,7 @@ class Necrolog {
     
     private func log(
         messages messages: Array<Any>,
-        forcePrefix messagePrefix: String? = nil,
+        forcePrefix messagePrefix: String = "",
         textColor: UIColor?,
         splitArgs: Bool = false,
         filePath: String? = nil,
@@ -194,7 +194,7 @@ class Necrolog {
             }
             
             // prefix
-            let finalPrefix = (messagePrefix != nil) ? " \(messagePrefix!)" : ""
+            let finalPrefix = self.colorize ? self.colored(string: messagePrefix, withColor: textColor!) : messagePrefix
             
             var outputString = "\(timeString)\(finalPrefix)"
             let separatorString = (messages.count > 1 && splitArgs) ? "\n        " : " "
