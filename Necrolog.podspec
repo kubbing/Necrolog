@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Necrolog"
-  s.version      = "0.9.6"
+  s.version      = "0.9.7"
   s.license      = { :type => "Beerware", :file => 'LICENCE.txt' }
   s.summary      = "Killer Swift debug log library for iOS."
   s.homepage     = "https://github.com/kubbing/Necrolog"

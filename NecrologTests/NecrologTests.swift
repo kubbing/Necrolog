@@ -8,7 +8,6 @@
 
 import XCTest
 
-//@import Foundation
 
 @testable import Necrolog
 

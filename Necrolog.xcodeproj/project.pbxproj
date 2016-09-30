@@ -32,6 +32,7 @@
 		177D26751C3FD26300FC14C1 /* NecrologTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NecrologTests.swift; sourceTree = "<group>"; };
 		177D26771C3FD26300FC14C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		177D26801C3FD27000FC14C1 /* Necrolog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Necrolog.swift; sourceTree = "<group>"; };
+		17B0484F1D9E92910097EC8C /* Necrolog.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Necrolog.podspec; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +78,7 @@
 				177D26691C3FD26300FC14C1 /* Necrolog.h */,
 				177D266B1C3FD26300FC14C1 /* Info.plist */,
 				177D26801C3FD27000FC14C1 /* Necrolog.swift */,
+				17B0484F1D9E92910097EC8C /* Necrolog.podspec */,
 			);
 			path = Necrolog;
 			sourceTree = "<group>";
@@ -152,9 +154,11 @@
 				TargetAttributes = {
 					177D26651C3FD26300FC14C1 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
 					};
 					177D266F1C3FD26300FC14C1 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -328,6 +332,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -345,6 +350,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kubbing.Necrolog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -355,6 +361,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kubbing.NecrologTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -365,6 +372,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kubbing.NecrologTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

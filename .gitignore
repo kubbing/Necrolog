@@ -20,3 +20,5 @@ xcuserdata
 ## Other
 *.xccheckout
 *.moved-aside
+
+.DS_Store
