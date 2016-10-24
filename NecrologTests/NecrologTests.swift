@@ -38,7 +38,8 @@ class NecrologTests: XCTestCase {
         Necrolog.error("error test", "2 args")
         
         Necrolog.verbose("verbose test", 2, 3)
-        Necrolog.debug("debug test", [ 2, 3 ])
+        Necrolog.debug("debug test", [ 2, 3 ], [ 2 : 3 ])
+        Necrolog.debug("debug test \([ 2, 3 ]), \([ 2 : 3 ])")
         Necrolog.info("info test", [ 2 : 3 ])
         Necrolog.warning("warning test", [ "key1" : "obj1", "key2" : "obj2" ])
         Necrolog.error("error test", NSError(domain: "Necrolog", code: 1, userInfo: [ "description" : "test error description" ]))
@@ -56,7 +57,7 @@ class NecrologTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .Verbose, withColors: false)
+        Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .verbose, withColors: false)
         
         self.necroPrint()
     }
@@ -65,16 +66,16 @@ class NecrologTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .Verbose, splitMultipleArgs: true, withColors: false)
+        Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .verbose, splitMultipleArgs: true, withColors: false)
         
         self.necroPrint()
     }
-    
+
     func testSingleLineColor() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .Verbose, withColors: true)
+        Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .verbose, withColors: true)
         
         self.necroPrint()
     }
@@ -83,7 +84,7 @@ class NecrologTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .Verbose, splitMultipleArgs: true, withColors: true)
+        Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .verbose, splitMultipleArgs: true, withColors: true)
         
         self.necroPrint()
     }
@@ -92,7 +93,7 @@ class NecrologTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .Verbose, logCodeLocation: false, withColors: true)
+        Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .verbose, logCodeLocation: false, withColors: true)
         
         self.necroPrint()
     }
@@ -101,17 +102,8 @@ class NecrologTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .Verbose, splitMultipleArgs: true, logCodeLocation: false, withColors: true)
+        Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .verbose, splitMultipleArgs: true, logCodeLocation: false, withColors: true)
         
         self.necroPrint()
     }
-
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
 }

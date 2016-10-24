@@ -12,44 +12,44 @@ import UIKit
 import UIKit
 
 @objc public enum LogLevel: Int {
-    case Verbose = 0
-    case Debug
-    case Info
-    case Warning
-    case Error
+    case verbose = 0
+    case debug
+    case info
+    case warning
+    case error
 }
 
-@objc public class Necrolog: NSObject {
+@objc open class Necrolog: NSObject {
     
     static let instance = Necrolog()
     
-    private override init() {
+    fileprivate override init() {
         
     }
     
     var time0 = CACurrentMediaTime()
-    var logLevel: LogLevel = .Debug
+    var logLevel: LogLevel = .debug
     var splitArgs = false
     var logCodeLocation = true
     
     // color support
     var colorize = false
-    public var timeColor = UIColor.grayColor()
-    public var verboseColor = UIColor.lightGrayColor()
-    public var debugColor = UIColor.lightGrayColor()
-    public var infoColor = UIColor.lightTextColor()
-    public var warningColor = UIColor.orangeColor()
-    public var errorColor = UIColor.redColor()
-    public var codeLocationColor = UIColor.darkGrayColor()
+    open var timeColor = UIColor.gray
+    open var verboseColor = UIColor.lightGray
+    open var debugColor = UIColor.lightGray
+    open var infoColor = UIColor.lightText
+    open var warningColor = UIColor.orange
+    open var errorColor = UIColor.red
+    open var codeLocationColor = UIColor.darkGray
     
     static let Escape: String = "\u{001b}["
     let ResetGg: String = Escape + "fg;"    // Clear any foreground color
     let ResetBg: String = Escape + "bg;"    // Clear any background color
     let Reset: String = Escape + ";"        // Clear any foreground or background color
     
-    public class func setup(
+    open class func setup(
         withInitialTimeInterval time0: CFTimeInterval = CACurrentMediaTime(),
-        logLevel level: LogLevel = .Debug,
+        logLevel level: LogLevel = .debug,
         splitMultipleArgs splitArgs: Bool = false,
         logCodeLocation: Bool = true,
         withColors colorize: Bool = false)
@@ -61,70 +61,70 @@ import UIKit
         self.instance.colorize = colorize
     }
     
-    public class func entry(
-        longPath: String = #file,
+    open class func entry(
+        _ longPath: String = #file,
         function: String = #function,
         line: Int = #line)
     {
-        self.instance.traceMessages([ "Entry" ], withLevel: .Debug, longPath: longPath, function: function, line: line)
+        self.instance.logMessages([ "Entry" ], withLevel: .debug, longPath: longPath, function: function, line: line)
     }
     
-    public class func exit(
-        longPath: String = #file,
+    open class func exit(
+        _ longPath: String = #file,
         function: String = #function,
         line: Int = #line)
     {
-        self.instance.traceMessages([ "Exit" ], withLevel: .Debug, longPath: longPath, function: function, line: line)
+        self.instance.logMessages([ "Exit" ], withLevel: .debug, longPath: longPath, function: function, line: line)
     }
     
-    public class func verbose(
-        messages: Any...,
+    open class func verbose(
+        _ messages: Any...,
         longPath: String = #file,
         function: String = #function,
         line: Int = #line) -> Void
     {
-        self.instance.traceMessages(messages, withLevel: .Verbose, longPath: longPath, function: function, line: line)
+        self.instance.logMessages(messages, withLevel: .verbose, longPath: longPath, function: function, line: line)
     }
     
-    public class func debug(
-        messages: Any...,
+    open class func debug(
+        _ messages: Any...,
         longPath: String = #file,
         function: String = #function,
         line: Int = #line) -> Void
     {
-        self.instance.traceMessages(messages, withLevel: .Debug, longPath: longPath, function: function, line: line)
+        self.instance.logMessages(messages, withLevel: .debug, longPath: longPath, function: function, line: line)
     }
     
-    public class func info(
-        messages: Any...,
+    open class func info(
+        _ messages: Any...,
         longPath: String = #file,
         function: String = #function,
         line: Int = #line) -> Void
     {
-        self.instance.traceMessages(messages, forcePrefix: " Info:", withLevel: .Info, longPath: longPath, function: function, line: line)
+        self.instance.logMessages(messages, withLevel: .info, forcePrefix: " Info:", longPath: longPath, function: function, line: line)
     }
     
-    public class func warning(
-        messages: Any...,
+    open class func warning(
+        _ messages: Any...,
         longPath: String = #file,
         function: String = #function,
         line: Int = #line) -> Void
     {
-        self.instance.traceMessages(messages, forcePrefix: " Warning:", withLevel: .Warning, longPath: longPath, function: function, line: line)
+        self.instance.logMessages(messages, withLevel: .warning, forcePrefix: " Warning:", longPath: longPath, function: function, line: line)
     }
     
-    public class func error(
-        messages: Any...,
+    open class func error(
+        _ messages: Any...,
         longPath: String = #file,
         function: String = #function,
         line: Int = #line) -> Void
     {
-        self.instance.traceMessages(messages, forcePrefix: " Error:", withLevel: .Error, longPath: longPath, function: function, line: line)
+        self.instance.logMessages(messages, withLevel: .error, forcePrefix: " Error:", longPath: longPath, function: function, line: line)
     }
     
-    private func traceMessages(
-        messages: Array<Any>,
-        withLevel level: LogLevel = .Debug,
+    fileprivate func logMessages(
+        _ messages: Array<Any>,
+        withLevel level: LogLevel = .debug,
         forcePrefix prefix: String = "",
         splitArray split: Bool = false,
         longPath: String? = nil,
@@ -148,8 +148,8 @@ import UIKit
         }
     }
     
-    private func logMessages(
-        messages: Array<Any>,
+    fileprivate func logMessages(
+        _ messages: Array<Any>,
         forcePrefix messagePrefix: String = "",
         textColor: UIColor?,
         splitArgs: Bool = false,
@@ -182,42 +182,41 @@ import UIKit
             var outputString = "\(timeString)\(finalPrefix)"
             let separatorString = (messages.count > 1 && splitArgs) ? "\n        " : " "
             
-            var iterator = messages.generate()
+            var iterator = messages.makeIterator()
             if let first = iterator.next() {
                 let firstString = " \(first)"
-                outputString.appendContentsOf(textColor != nil ? self.coloredString(firstString, withColor: textColor!) : firstString)
+                outputString.append(textColor != nil ? self.coloredString(firstString, withColor: textColor!) : firstString)
             }
             
             while let element = iterator.next() {
                 let elementString = "\(separatorString)\(element)"
-                outputString.appendContentsOf(textColor != nil ? self.coloredString(elementString, withColor: textColor!) : elementString);
+                outputString.append(textColor != nil ? self.coloredString(elementString, withColor: textColor!) : elementString);
             }
             
             if let line = codeLocation {
-                outputString.appendContentsOf(" \(line)")
+                outputString.append(" \(line)")
             }
             
             print(outputString)
         #endif
     }
     
-    private func color(forLogLevel level: LogLevel) -> UIColor {
+    fileprivate func color(forLogLevel level: LogLevel) -> UIColor {
         switch (level) {
-        case .Verbose:
+        case .verbose:
             return self.verboseColor
-        case .Debug:
+        case .debug:
             return self.debugColor
-        case .Info:
+        case .info:
             return self.infoColor
-        case .Warning:
+        case .warning:
             return self.warningColor
-            
-        case .Error:
+        case .error:
             return self.errorColor
         }
     }
     
-    private func colorString(fromColor color: UIColor) -> String {
+    fileprivate func colorString(fromColor color: UIColor) -> String {
         var r: CGFloat = 0
         var g: CGFloat = 0
         var b: CGFloat = 0
@@ -227,7 +226,7 @@ import UIKit
         return "\(Necrolog.Escape)fg\(Int(r*255)),\(Int(g*255)),\(Int(b*255));" // \(Escape)fg128,128,128;
     }
     
-    private func coloredString(string: String,
+    fileprivate func coloredString(_ string: String,
                                withColor color: UIColor) -> String
     {
         return "\(self.colorString(fromColor: color))\(string)\(self.Reset)"
