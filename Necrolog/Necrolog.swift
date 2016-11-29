@@ -42,6 +42,9 @@ import UIKit
     open var errorColor = UIColor.red
     open var codeLocationColor = UIColor.darkGray
     
+    // emoji support
+    var includeEmoji = false
+    
     static let Escape: String = "\u{001b}["
     let ResetGg: String = Escape + "fg;"    // Clear any foreground color
     let ResetBg: String = Escape + "bg;"    // Clear any background color
@@ -52,13 +55,15 @@ import UIKit
         logLevel level: LogLevel = .debug,
         splitMultipleArgs splitArgs: Bool = false,
         logCodeLocation: Bool = true,
-        withColors colorize: Bool = false)
+        withColors colorize: Bool = false,
+        withEmoji: Bool = true)
     {
         self.instance.time0 = time0
         self.instance.logLevel = level
         self.instance.splitArgs = splitArgs
         self.instance.logCodeLocation = logCodeLocation
         self.instance.colorize = colorize
+        self.instance.includeEmoji = withEmoji
     }
     
     open class func entry(
@@ -139,7 +144,7 @@ import UIKit
         
         if level.rawValue >= self.logLevel.rawValue {
             self.logMessages(messages,
-                             forcePrefix: prefix,
+                             forcePrefix: includeEmoji == true ? " \(emoji(forLogLevel: level))\(prefix)" : prefix,
                              textColor: self.colorize ? self.color(forLogLevel: level) : nil,
                              splitArgs: self.splitArgs,
                              filePath: longPath,
@@ -216,6 +221,21 @@ import UIKit
         }
     }
     
+    fileprivate func emoji(forLogLevel level: LogLevel) -> String {
+        switch (level) {
+        case .verbose:
+            return "🗣"
+        case .debug:
+            return "🐜"
+        case .info:
+            return "ℹ️"
+        case .warning:
+            return "⚠️"
+        case .error:
+            return "❌"
+        }
+    }
+    
     fileprivate func colorString(fromColor color: UIColor) -> String {
         var r: CGFloat = 0
         var g: CGFloat = 0
@@ -227,7 +247,7 @@ import UIKit
     }
     
     fileprivate func coloredString(_ string: String,
-                               withColor color: UIColor) -> String
+                                   withColor color: UIColor) -> String
     {
         return "\(self.colorString(fromColor: color))\(string)\(self.Reset)"
     }
