@@ -63,7 +63,7 @@ public final class Necrolog: NSObject {
         self.instance.includeEmoji = withEmoji
     }
     
-    class func entry(
+    public class func entry(
         _ longPath: String = #file,
         function: String = #function,
         line: Int = #line)
@@ -71,7 +71,7 @@ public final class Necrolog: NSObject {
         self.instance.logMessages([ "Entry" ], withLevel: .debug, longPath: longPath, function: function, line: line)
     }
     
-    class func exit(
+    public class func exit(
         _ longPath: String = #file,
         function: String = #function,
         line: Int = #line)
@@ -79,7 +79,7 @@ public final class Necrolog: NSObject {
         self.instance.logMessages([ "Exit" ], withLevel: .debug, longPath: longPath, function: function, line: line)
     }
     
-    class func verbose(
+    public class func verbose(
         _ messages: Any?...,
         longPath: String = #file,
         function: String = #function,
@@ -88,7 +88,7 @@ public final class Necrolog: NSObject {
         self.instance.logMessages(messages, withLevel: .verbose, longPath: longPath, function: function, line: line)
     }
     
-    class func debug(
+    public class func debug(
         _ messages: Any?...,
         longPath: String = #file,
         function: String = #function,
@@ -97,7 +97,7 @@ public final class Necrolog: NSObject {
         self.instance.logMessages(messages, withLevel: .debug, longPath: longPath, function: function, line: line)
     }
     
-    class func info(
+    public class func info(
         _ messages: Any?...,
         longPath: String = #file,
         function: String = #function,
@@ -106,7 +106,7 @@ public final class Necrolog: NSObject {
         self.instance.logMessages(messages, withLevel: .info, forcePrefix: " Info:", longPath: longPath, function: function, line: line)
     }
     
-    class func warning(
+    public class func warning(
         _ messages: Any?...,
         longPath: String = #file,
         function: String = #function,
@@ -115,7 +115,7 @@ public final class Necrolog: NSObject {
         self.instance.logMessages(messages, withLevel: .warning, forcePrefix: " Warning:", longPath: longPath, function: function, line: line)
     }
     
-    class func error(
+    public class func error(
         _ messages: Any?...,
         longPath: String = #file,
         function: String = #function,
