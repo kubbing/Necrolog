@@ -17,7 +17,7 @@ public enum LogLevel: Int {
     case error
 }
 
-final class Necrolog: NSObject {
+public final class Necrolog: NSObject {
     
     static let instance = Necrolog()
     
