@@ -48,7 +48,7 @@ public final class Necrolog: NSObject {
     let ResetBg: String = Escape + "bg;"    // Clear any background color
     let Reset: String = Escape + ";"        // Clear any foreground or background color
     
-    class func setup(withInitialTimeInterval time0: CFTimeInterval = CACurrentMediaTime(),
+    public class func setup(withInitialTimeInterval time0: CFTimeInterval = CACurrentMediaTime(),
                      logLevel level: LogLevel = .debug,
                      splitMultipleArgs splitArgs: Bool = false,
                      logCodeLocation: Bool = true,
