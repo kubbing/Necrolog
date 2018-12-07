@@ -103,7 +103,7 @@ final class Necrolog: NSObject {
         function: String = #function,
         line: Int = #line) -> Void
     {
-        self.instance.logMessages(messages, withLevel: .info, longPath: longPath, function: function, line: line)
+        self.instance.logMessages(messages, withLevel: .info, forcePrefix: " Info:", longPath: longPath, function: function, line: line)
     }
     
     class func warning(
@@ -112,7 +112,7 @@ final class Necrolog: NSObject {
         function: String = #function,
         line: Int = #line) -> Void
     {
-        self.instance.logMessages(messages, withLevel: .warning, longPath: longPath, function: function, line: line)
+        self.instance.logMessages(messages, withLevel: .warning, forcePrefix: " Warning:", longPath: longPath, function: function, line: line)
     }
     
     class func error(
@@ -121,7 +121,7 @@ final class Necrolog: NSObject {
         function: String = #function,
         line: Int = #line) -> Void
     {
-        self.instance.logMessages(messages, withLevel: .error, longPath: longPath, function: function, line: line)
+        self.instance.logMessages(messages, withLevel: .error, forcePrefix: " Error:", longPath: longPath, function: function, line: line)
     }
     
     fileprivate func logMessages(
@@ -202,7 +202,7 @@ final class Necrolog: NSObject {
         }
         
         var finalString = initialString
-        finalString.append(": ")
+        finalString.append(" ")
         finalString.append(messageString)
         
         if let line = codeLocation {
