@@ -9,9 +9,7 @@
 import UIKit
 
 
-import UIKit
-
-@objc public enum LogLevel: Int {
+public enum LogLevel: Int {
     case verbose = 0
     case debug
     case info
@@ -19,7 +17,7 @@ import UIKit
     case error
 }
 
-@objc open class Necrolog: NSObject {
+final class Necrolog: NSObject {
     
     static let instance = Necrolog()
     
@@ -27,36 +25,35 @@ import UIKit
         
     }
     
-    var time0 = CACurrentMediaTime()
-    var logLevel: LogLevel = .debug
-    var splitArgs = false
-    var logCodeLocation = true
+    private(set) var time0 = CACurrentMediaTime()
+    private(set) var logLevel: LogLevel = .debug
+    private(set) var splitArgs = false
+    private(set) var logCodeLocation = true
     
     // color support
-    var colorize = false
-    open var timeColor = UIColor.gray
-    open var verboseColor = UIColor.lightGray
-    open var debugColor = UIColor.lightGray
-    open var infoColor = UIColor.lightText
-    open var warningColor = UIColor.orange
-    open var errorColor = UIColor.red
-    open var codeLocationColor = UIColor.darkGray
+    private(set) var colorize = false
+    let timeColor = UIColor.gray
+    let verboseColor = UIColor.lightGray
+    let debugColor = UIColor.lightGray
+    let infoColor = UIColor.lightText
+    let warningColor = UIColor.orange
+    let errorColor = UIColor.red
+    let codeLocationColor = UIColor.darkGray
     
     // emoji support
-    var includeEmoji = false
+    private(set) var includeEmoji = false
     
     static let Escape: String = "\u{001b}["
     let ResetGg: String = Escape + "fg;"    // Clear any foreground color
     let ResetBg: String = Escape + "bg;"    // Clear any background color
     let Reset: String = Escape + ";"        // Clear any foreground or background color
     
-    open class func setup(
-        withInitialTimeInterval time0: CFTimeInterval = CACurrentMediaTime(),
-        logLevel level: LogLevel = .debug,
-        splitMultipleArgs splitArgs: Bool = false,
-        logCodeLocation: Bool = true,
-        withColors colorize: Bool = false,
-        withEmoji: Bool = true)
+    class func setup(withInitialTimeInterval time0: CFTimeInterval = CACurrentMediaTime(),
+                     logLevel level: LogLevel = .debug,
+                     splitMultipleArgs splitArgs: Bool = false,
+                     logCodeLocation: Bool = true,
+                     withColors colorize: Bool = false,
+                     withEmoji: Bool = true)
     {
         self.instance.time0 = time0
         self.instance.logLevel = level
@@ -66,7 +63,7 @@ import UIKit
         self.instance.includeEmoji = withEmoji
     }
     
-    open class func entry(
+    class func entry(
         _ longPath: String = #file,
         function: String = #function,
         line: Int = #line)
@@ -74,7 +71,7 @@ import UIKit
         self.instance.logMessages([ "Entry" ], withLevel: .debug, longPath: longPath, function: function, line: line)
     }
     
-    open class func exit(
+    class func exit(
         _ longPath: String = #file,
         function: String = #function,
         line: Int = #line)
@@ -82,7 +79,7 @@ import UIKit
         self.instance.logMessages([ "Exit" ], withLevel: .debug, longPath: longPath, function: function, line: line)
     }
     
-    open class func verbose(
+    class func verbose(
         _ messages: Any...,
         longPath: String = #file,
         function: String = #function,
@@ -91,7 +88,7 @@ import UIKit
         self.instance.logMessages(messages, withLevel: .verbose, longPath: longPath, function: function, line: line)
     }
     
-    open class func debug(
+    class func debug(
         _ messages: Any...,
         longPath: String = #file,
         function: String = #function,
@@ -100,7 +97,7 @@ import UIKit
         self.instance.logMessages(messages, withLevel: .debug, longPath: longPath, function: function, line: line)
     }
     
-    open class func info(
+    class func info(
         _ messages: Any...,
         longPath: String = #file,
         function: String = #function,
@@ -109,7 +106,7 @@ import UIKit
         self.instance.logMessages(messages, withLevel: .info, forcePrefix: " Info:", longPath: longPath, function: function, line: line)
     }
     
-    open class func warning(
+    class func warning(
         _ messages: Any...,
         longPath: String = #file,
         function: String = #function,
@@ -118,7 +115,7 @@ import UIKit
         self.instance.logMessages(messages, withLevel: .warning, forcePrefix: " Warning:", longPath: longPath, function: function, line: line)
     }
     
-    open class func error(
+    class func error(
         _ messages: Any...,
         longPath: String = #file,
         function: String = #function,
@@ -194,7 +191,7 @@ import UIKit
             }
             
             while let element = iterator.next() {
-                let elementString = "\(separatorString)\(element)"
+                let elementString = "\(separatorString)\(String(describing: element))"
                 outputString.append(textColor != nil ? self.coloredString(elementString, withColor: textColor!) : elementString);
             }
             
@@ -226,13 +223,13 @@ import UIKit
         case .verbose:
             return "🗣"
         case .debug:
-            return "🐜"
+            return "🐛"
         case .info:
             return "ℹ️"
         case .warning:
             return "⚠️"
         case .error:
-            return "❌"
+            return "🛑"
         }
     }
     

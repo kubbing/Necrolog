@@ -11,6 +11,7 @@ import XCTest
 
 @testable import Necrolog
 
+
 class NecrologTests: XCTestCase {
     
     override func setUp() {
@@ -37,7 +38,9 @@ class NecrologTests: XCTestCase {
         Necrolog.warning("warning test", "2 args")
         Necrolog.error("error test", "2 args")
         
-        Necrolog.verbose("verbose test", 2, 3)
+        let testString: String? = "hello"
+        
+        Necrolog.verbose("verbose test", 2, 3, testString)
         Necrolog.debug("debug test", [ 2, 3 ], [ 2 : 3 ])
         Necrolog.debug("debug test \([ 2, 3 ]), \([ 2 : 3 ])")
         Necrolog.info("info test", [ 2 : 3 ])
@@ -75,7 +78,7 @@ class NecrologTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .verbose, withColors: true)
+        Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .verbose, withColors: false)
         
         self.necroPrint()
     }
@@ -84,7 +87,7 @@ class NecrologTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .verbose, splitMultipleArgs: true, withColors: true)
+        Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .verbose, splitMultipleArgs: true, withColors: false)
         
         self.necroPrint()
     }
@@ -93,7 +96,7 @@ class NecrologTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .verbose, logCodeLocation: false, withColors: true)
+        Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .verbose, logCodeLocation: false, withColors: false)
         
         self.necroPrint()
     }
