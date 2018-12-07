@@ -80,7 +80,7 @@ final class Necrolog: NSObject {
     }
     
     class func verbose(
-        _ messages: Any...,
+        _ messages: Any?...,
         longPath: String = #file,
         function: String = #function,
         line: Int = #line) -> Void
@@ -89,7 +89,7 @@ final class Necrolog: NSObject {
     }
     
     class func debug(
-        _ messages: Any...,
+        _ messages: Any?...,
         longPath: String = #file,
         function: String = #function,
         line: Int = #line) -> Void
@@ -98,34 +98,34 @@ final class Necrolog: NSObject {
     }
     
     class func info(
-        _ messages: Any...,
+        _ messages: Any?...,
         longPath: String = #file,
         function: String = #function,
         line: Int = #line) -> Void
     {
-        self.instance.logMessages(messages, withLevel: .info, forcePrefix: " Info:", longPath: longPath, function: function, line: line)
+        self.instance.logMessages(messages, withLevel: .info, longPath: longPath, function: function, line: line)
     }
     
     class func warning(
-        _ messages: Any...,
+        _ messages: Any?...,
         longPath: String = #file,
         function: String = #function,
         line: Int = #line) -> Void
     {
-        self.instance.logMessages(messages, withLevel: .warning, forcePrefix: " Warning:", longPath: longPath, function: function, line: line)
+        self.instance.logMessages(messages, withLevel: .warning, longPath: longPath, function: function, line: line)
     }
     
     class func error(
-        _ messages: Any...,
+        _ messages: Any?...,
         longPath: String = #file,
         function: String = #function,
         line: Int = #line) -> Void
     {
-        self.instance.logMessages(messages, withLevel: .error, forcePrefix: " Error:", longPath: longPath, function: function, line: line)
+        self.instance.logMessages(messages, withLevel: .error, longPath: longPath, function: function, line: line)
     }
     
     fileprivate func logMessages(
-        _ messages: Array<Any>,
+        _ messages: Array<Any?>,
         withLevel level: LogLevel = .debug,
         forcePrefix prefix: String = "",
         splitArray split: Bool = false,
@@ -151,7 +151,7 @@ final class Necrolog: NSObject {
     }
     
     fileprivate func logMessages(
-        _ messages: Array<Any>,
+        _ messages: Array<Any?>,
         forcePrefix messagePrefix: String = "",
         textColor: UIColor?,
         splitArgs: Bool = false,
@@ -160,46 +160,56 @@ final class Necrolog: NSObject {
         lineNumber: Int? = nil) -> Void
     {
         #if DEBUG
-            // time
-            let elapsedTime = CACurrentMediaTime() - self.time0;
-            let elapsedString = String(format: "%7.2f", elapsedTime)
-            let timeString = textColor != nil ? self.coloredString(elapsedString, withColor: self.timeColor) : elapsedString
-            
-            // file function:line
-            var codeLocation: String?
-            if logCodeLocation == true, let path = filePath, let function = functionName, let line = lineNumber {
-                let filename = (path as NSString).lastPathComponent
-                let filenameFunctionLine = "- \(filename) \(function):\(line)"
-                if self.colorize {
-                    codeLocation = self.coloredString(filenameFunctionLine, withColor: self.codeLocationColor)
+        // time
+        let elapsedTime = CACurrentMediaTime() - self.time0;
+        let elapsedString = String(format: "%7.2f", elapsedTime)
+        let timeString = textColor != nil ? self.coloredString(elapsedString, withColor: self.timeColor) : elapsedString
+        
+        // file function:line
+        var codeLocation: String?
+        if logCodeLocation == true, let path = filePath, let function = functionName, let line = lineNumber {
+            let filename = (path as NSString).lastPathComponent
+            let filenameFunctionLine = "- \(filename) \(function):\(line)"
+            if self.colorize {
+                codeLocation = self.coloredString(filenameFunctionLine, withColor: self.codeLocationColor)
+            }
+            else {
+                codeLocation = filenameFunctionLine
+            }
+        }
+        
+        // prefix
+        let finalPrefix = self.colorize ? self.coloredString(messagePrefix, withColor: textColor!) : messagePrefix
+        
+        let initialString = "\(timeString)\(finalPrefix)"
+        let separatorString = (messages.count > 1 && splitArgs) ? "\n        " : " "
+        
+        let messageString = messages.reduce("") { (partial, element) -> String in
+            switch element {
+            case .some(let elem):
+                if partial.count == 0 {
+                    let elementString: String = "\(elem)"
+                    return textColor != nil ? self.coloredString(elementString, withColor: textColor!) : elementString
                 }
                 else {
-                    codeLocation = filenameFunctionLine
+                    let elementString: String = "\(partial)\(separatorString)\(elem)"
+                    return textColor != nil ? self.coloredString(elementString, withColor: textColor!) : elementString
                 }
+            case .none:
+                let elementString: String = "\(partial)\(separatorString)nil)"
+                return textColor != nil ? self.coloredString(elementString, withColor: textColor!) : elementString
             }
-            
-            // prefix
-            let finalPrefix = self.colorize ? self.coloredString(messagePrefix, withColor: textColor!) : messagePrefix
-            
-            var outputString = "\(timeString)\(finalPrefix)"
-            let separatorString = (messages.count > 1 && splitArgs) ? "\n        " : " "
-            
-            var iterator = messages.makeIterator()
-            if let first = iterator.next() {
-                let firstString = " \(first)"
-                outputString.append(textColor != nil ? self.coloredString(firstString, withColor: textColor!) : firstString)
-            }
-            
-            while let element = iterator.next() {
-                let elementString = "\(separatorString)\(String(describing: element))"
-                outputString.append(textColor != nil ? self.coloredString(elementString, withColor: textColor!) : elementString);
-            }
-            
-            if let line = codeLocation {
-                outputString.append(" \(line)")
-            }
-            
-            print(outputString)
+        }
+        
+        var finalString = initialString
+        finalString.append(": ")
+        finalString.append(messageString)
+        
+        if let line = codeLocation {
+            finalString.append(" \(line)")
+        }
+        
+        print(finalString)
         #endif
     }
     

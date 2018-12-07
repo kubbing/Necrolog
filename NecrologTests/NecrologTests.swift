@@ -60,7 +60,7 @@ class NecrologTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .verbose, withColors: false)
+        Necrolog.setup(withInitialTimeInterval: CACurrentMediaTime(), logLevel: .verbose, logCodeLocation: true, withColors: false, withEmoji: true)
         
         self.necroPrint()
     }
